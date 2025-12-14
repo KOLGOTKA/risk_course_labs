@@ -63,4 +63,5 @@ Temporary Items
 ######################
 *.log
 *.sql
-*.sqlite*.tar
+*.sqlite
+*.tar
