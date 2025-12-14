@@ -8,7 +8,7 @@ WORKDIR /hello
 COPY --from=builder /wheels /wheels 
 COPY requirements.txt .
 RUN pip install --no-index --find-links=/wheels -r requirements.txt
-COPY hello.py .
+COPY my_hello.py .
 
 ENV PYTHONUNBUFFERED=1
-CMD ["python", "hello.py"]
+ENTRYPOINT ["python", "my_hello.py"]
