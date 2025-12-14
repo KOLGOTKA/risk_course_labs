@@ -1,2 +1,2 @@
-typer
-pygame
+typer==0.20.0
+pygame==2.6.1
