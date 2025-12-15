@@ -83,6 +83,7 @@ site
 *.jar
 *.rar
 *.zip
+*.tar
 # *.tar
 
 # Secrets и env-конфиги
@@ -92,3 +93,8 @@ site
 
 # Node.js
 node_modules/
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
