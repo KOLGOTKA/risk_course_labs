@@ -28,7 +28,7 @@ COLORS = [
 RESET = "\033[0m"
 
 
-def rainbow_print(text: str):
+def rainbow_print(text: str) -> None:
     """Выводит строку, в которой каждая буква случайного цвета"""
     out = []
     for ch in text:
@@ -37,7 +37,7 @@ def rainbow_print(text: str):
     print("".join(out))
 
 
-def show_pygame_window(text: str = "Hello appsec world*"):
+def show_pygame_window(text: str = "Hello appsec world*") -> None:
     """
     Открывает окно pygame и выводит в нём текст.
     Используется только для стилизации окна (по заданию).
@@ -96,7 +96,7 @@ def hello_printer(
         "-w",
         help="Открыть графическое окно с надписью 'Hello appsec world*' (pygame).",
     ),
-):
+) -> None:
     """
     Здоровается с пользователем, используя повседневный,
     формальный или неформальный стиль.
