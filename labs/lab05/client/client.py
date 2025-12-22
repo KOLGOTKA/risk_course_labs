@@ -7,6 +7,7 @@ RETRIES = 30
 SLEEP_S = 1.0
 TIMEOUT_S = 3.0
 
+
 def colorful_print(text):
     colors = ["\033[91m", "\033[92m", "\033[93m", "\033[94m", "\033[95m"]
     reset = "\033[0m"
@@ -16,6 +17,7 @@ def colorful_print(text):
         sys.stdout.flush()
         time.sleep(0.02)
     print()
+
 
 def wait_for_server():
     health_url = SERVER_URL.rstrip("/") + "/health"
@@ -29,6 +31,7 @@ def wait_for_server():
             pass
 
     return False
+
 
 if __name__ == "__main__":
     if not wait_for_server():

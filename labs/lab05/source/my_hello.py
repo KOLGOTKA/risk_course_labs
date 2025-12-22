@@ -1,6 +1,7 @@
 """
 Модуль для приветствия пользователя
 """
+
 import random
 import typer
 import pygame
@@ -84,16 +85,10 @@ def hello_printer(
     name: str = typer.Argument(..., help="Имя пользователя."),
     lastname: str = typer.Option("", help="Фамилия пользователя."),
     formal: bool = typer.Option(
-        False,
-        "--formal",
-        "-f",
-        help="Формальное приветствие."
+        False, "--formal", "-f", help="Формальное приветствие."
     ),
     antiformal: bool = typer.Option(
-        False,
-        "--antiformal",
-        "-af",
-        help="Неформальное приветствие."
+        False, "--antiformal", "-af", help="Неформальное приветствие."
     ),
     window: bool = typer.Option(
         False,
