@@ -442,7 +442,7 @@ Status: Image is up to date for kolgotka/hello-appsec-world:latest
 docker.io/kolgotka/hello-appsec-world:latest
 ```
 
-_Команда inspect выводит практически такие же результаты, как и в предыдущем случае_
+_Команда inspect выводит практически такие же результаты, как и в предыдущем случае_.
 
 ```bash
 uniqm@DESKTOP-OT4LBEF:~/DevSecOps/risk_course_labs/labs/lab05/source$ docker container create --name second hello-appsec-world
