@@ -171,11 +171,15 @@ jobs:
       - dependency_audit_checks
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Scan repository for secrets with gitleaks
         uses: gitleaks/gitleaks-action@v2
         with:
           config-path: .gitleaks.toml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   security_docker_checks:
     runs-on: ubuntu-latest

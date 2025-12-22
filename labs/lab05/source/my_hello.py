@@ -1,8 +1,8 @@
 """
 Модуль для приветствия пользователя
 """
+
 import random
-from typing import Optional
 import typer
 import pygame
 
@@ -84,8 +84,12 @@ def show_pygame_window(text: str = "Hello appsec world*"):
 def hello_printer(
     name: str = typer.Argument(..., help="Имя пользователя."),
     lastname: str = typer.Option("", help="Фамилия пользователя."),
-    formal: bool = typer.Option(False, "--formal", "-f", help="Формальное приветствие."),
-    antiformal: bool = typer.Option(False, "--antiformal", "-af", help="Неформальное приветствие."),
+    formal: bool = typer.Option(
+        False, "--formal", "-f", help="Формальное приветствие."
+    ),
+    antiformal: bool = typer.Option(
+        False, "--antiformal", "-af", help="Неформальное приветствие."
+    ),
     window: bool = typer.Option(
         False,
         "--window",
@@ -94,7 +98,8 @@ def hello_printer(
     ),
 ):
     """
-    Здоровается с пользователем, используя повседневный, формальный или неформальный стиль.
+    Здоровается с пользователем, используя повседневный,
+    формальный или неформальный стиль.
     При необходимости открывает окно pygame.
     """
     if formal:
