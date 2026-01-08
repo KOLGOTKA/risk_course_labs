@@ -98,6 +98,7 @@ jobs:
             SECURITY.md
             CODE_OF_CONDUCT.md
             CONTRIBUTING.md
+            !labs/lab07/sca/tools/**/*
 
   layout_linter_checks:
     runs-on: ubuntu-latest
