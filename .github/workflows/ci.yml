@@ -99,6 +99,7 @@ jobs:
             CODE_OF_CONDUCT.md
             CONTRIBUTING.md
             !labs/lab07/sca/tools/**/*
+            !labs/lab06/README.md
 
   layout_linter_checks:
     runs-on: ubuntu-latest
