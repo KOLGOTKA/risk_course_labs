@@ -104,11 +104,6 @@ def read_file():
 
 @app.route("/load")
 def load():
-    """
-    FIX: убираем pickle.loads() (опасная десериализация).
-    Вместо этого принимаем безопасный формат (JSON-строку) либо просто возвращаем текст.
-    Для минимального изменения: принимаем hex -> bytes -> decode('utf-8') и не исполняем.
-    """
     data = request.args.get("data", "")
     if not data:
         abort(400, description="Missing data.")
