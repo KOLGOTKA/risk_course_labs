@@ -12,7 +12,6 @@
   <packaging>jar</packaging>
   <name>sca-demo</name>
 
-  <!-- Выровнять версии Jackson (важно, чтобы не тянулись старые jackson-core/databind) -->
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -27,20 +26,17 @@
 
   <dependencies>
 
-    <!-- groovy-all:2.1.6 -> groovy:4.0.15 -->
     <dependency>
       <groupId>org.apache.groovy</groupId>
       <artifactId>groovy</artifactId>
       <version>4.0.15</version>
     </dependency>
 
-    <!-- jackson-jaxrs-json-provider:2.4.6 -> 2.16.1 (версия берется из BOM) -->
     <dependency>
       <groupId>com.fasterxml.jackson.jaxrs</groupId>
       <artifactId>jackson-jaxrs-json-provider</artifactId>
     </dependency>
 
-    <!-- commons-httpclient:3.1 -> httpclient5:5.2.1 -->
     <dependency>
       <groupId>org.apache.httpcomponents.client5</groupId>
       <artifactId>httpclient5</artifactId>
@@ -59,11 +55,7 @@
         <configuration>
           <format>ALL</format>
           <outputDirectory>${project.basedir}/dependency-check-report</outputDirectory>
-
-          <!-- Важно: база NVD берется локально, чтобы не перекачивать -->
           <autoUpdate>false</autoUpdate>
-
-          <!-- Для лабораторной не валим сборку по CVSS -->
           <failBuildOnCVSS>11</failBuildOnCVSS>
         </configuration>
 

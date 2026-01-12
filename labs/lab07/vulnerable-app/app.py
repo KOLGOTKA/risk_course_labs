@@ -17,7 +17,6 @@ DB_PATH = "app.db"
 
 logging.basicConfig(level=logging.DEBUG)
 
-# --- FIX: ограничиваем доступ к чтению файлов только в пределах "allowed" директории
 BASE_READ_DIR = Path("/tmp/vulnerable-app-allowed").resolve()
 BASE_READ_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -29,7 +28,6 @@ def get_db():
 
 @app.route("/")
 def index():
-    # FIX: не раскрываем версию приложения в ответе
     return "Vulnerable lab07 app"
 
 
@@ -38,7 +36,7 @@ def get_user():
     username = request.args.get("name", "")
     conn = get_db()
     cur = conn.cursor()
-    query = f"SELECT id, name, email FROM users WHERE name = '{username}'"  # nosec B608
+    query = f"SELECT id, name, email FROM users WHERE name = '{username}'"
     app.logger.debug("Executing query: %s", query)
     rows = cur.execute(query).fetchall()
     conn.close()
@@ -60,20 +58,18 @@ def ping():
     """
     host = request.args.get("host", "127.0.0.1")
 
-    # принимаем только IP-адрес (IPv4/IPv6); можно расширить до hostname при необходимости
     try:
         ipaddress.ip_address(host)
     except ValueError:
         abort(400, description="Invalid host (expected IP address).")
 
-    # безопасный вызов без shell и без конкатенации команды
     subprocess.run(["ping", "-c", "1", host], check=False)
     return f"Pinged {host}"
 
 
 @app.route("/backup")
 def backup():
-    target = request.args.get("target", "/tmp/backup.sql")  # nosec B108
+    target = request.args.get("target", "/tmp/backup.sql")
     cmd = ["sh", "-c", f"pg_dump mydb > {target}"]
     subprocess.call(cmd)
     return f"Backup to {target} started"
@@ -88,13 +84,11 @@ def read_file():
     """
     rel = request.args.get("path", "example.txt")
 
-    # не принимаем абсолютные пути, чтобы не читать /etc/passwd и т.п.
     if os.path.isabs(rel):
         abort(400, description="Absolute paths are not allowed.")
 
     candidate = (BASE_READ_DIR / rel).resolve()
 
-    # проверка, что путь остаётся внутри BASE_READ_DIR
     if BASE_READ_DIR not in candidate.parents and candidate != BASE_READ_DIR:
         abort(403, description="Path traversal attempt blocked.")
 
@@ -122,7 +116,6 @@ def load():
     try:
         raw = bytes.fromhex(data)
         text = raw.decode("utf-8", errors="replace")
-        # Не выполняем десериализацию/код, только отображаем
         return f"Loaded data (as text): {text}"
     except ValueError:
         abort(400, description="Invalid hex-encoded data.")
@@ -130,7 +123,6 @@ def load():
         return f"Error: {e}", 500
 
 
-# --- FIX: безопасная замена eval() на ограниченный вычислитель выражений
 _ALLOWED_OPS = {
     ast.Add: op.add,
     ast.Sub: op.sub,
@@ -190,4 +182,4 @@ def debug():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)  # nosec B104
+    app.run(host="0.0.0.0", port=8080)

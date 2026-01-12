@@ -51,7 +51,7 @@ print(f"✓ Unified JSON report: {out_dir}/unified-report.json")
 with open(f"{out_dir}/unified-report.csv", "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["Tool", "Type", "Severity", "File", "Line", "Description"])
-    
+
     # Semgrep findings
     for r in semgrep_data.get("results", []):
         writer.writerow([
@@ -62,7 +62,7 @@ with open(f"{out_dir}/unified-report.csv", "w", newline="") as f:
             r.get("start", {}).get("line", ""),
             r.get("extra", {}).get("message", "")
         ])
-    
+
     # Checkov findings
     for c in checkov_data.get("results", {}).get("failed_checks", []):
         writer.writerow([
@@ -73,7 +73,7 @@ with open(f"{out_dir}/unified-report.csv", "w", newline="") as f:
             str(c.get("file_line_range", [0, 0])[0]) if c.get("file_line_range") else "",
             c.get("check_name", "")
         ])
-    
+
     # Dependency-Check findings
     for dep in dependency_check_data.get("dependencies", []):
         for vuln in dep.get("vulnerabilities", []):
@@ -110,7 +110,8 @@ html_content = f"""<!DOCTYPE html>
         <h2>Summary</h2>
         <p><strong>Semgrep Findings:</strong> {unified["semgrep"]["findings_count"]}</p>
         <p><strong>Checkov Failed:</strong> {unified["checkov"]["failed"]}</p>
-        <p><strong>Dependency-Check Dependencies:</strong> {unified["dependency_check"]["dependencies_count"]}</p>
+        <p><strong>Dependency-Check Dependencies:</strong>
+            {unified["dependency_check"]["dependencies_count"]}</p>
     </div>
     <h2>Findings</h2>
 """
@@ -119,7 +120,8 @@ for r in semgrep_data.get("results", []):
     severity = r.get("extra", {}).get("severity", "UNKNOWN").lower()
     html_content += f"""
     <div class="finding {severity}">
-        <strong>[Semgrep]</strong> {r.get("check_id", "")} - {r.get("extra", {}).get("message", "")}<br>
+        <strong>[Semgrep]</strong>
+            {r.get("check_id", "")} - {r.get("extra", {}).get("message", "")}<br>
         <small>{r.get("path", "")}:{r.get("start", {}).get("line", "")}</small>
     </div>
     """
@@ -127,7 +129,8 @@ for r in semgrep_data.get("results", []):
 for c in checkov_data.get("results", {}).get("failed_checks", []):
     html_content += f"""
     <div class="finding">
-        <strong>[Checkov]</strong> {c.get("check_id", "")} - {c.get("check_name", "")}<br>
+        <strong>[Checkov]</strong>
+            {c.get("check_id", "")} - {c.get("check_name", "")}<br>
         <small>{c.get("file_path", "")}</small>
     </div>
     """
