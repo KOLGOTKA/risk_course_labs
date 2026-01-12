@@ -1,3 +1,4 @@
+# shellcheck disable=SC2086,SC2046
 #!/usr/bin/env sh
 #
 # Copyright (c) 2012-2013 Jeremy Long.  All rights reserved.
