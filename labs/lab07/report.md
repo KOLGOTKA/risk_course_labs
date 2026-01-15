@@ -369,13 +369,13 @@ $ checkov \
 
 Найденные проблемы (FAILED checks):
 
-**FAILED #1 — CKV_DOCKER_2 / BC_DKR_2**
+1) FAILED #1 — CKV_DOCKER_2 / BC_DKR_2
 
 Проверка: “Ensure that HEALTHCHECK instructions have been added to container images”
 Смысл: в Dockerfile отсутствует директива HEALTHCHECK. 
 Почему это важно: без HEALTHCHECK оркестратор хуже понимает жив ли контейнер на уровне приложения. Контейнер может оставаться в статусе running при сломавшемся приложении.
 
-**FAILED #2 — CKV_DOCKER_3 / BC_DKR_3**
+2) FAILED #2 — CKV_DOCKER_3 / BC_DKR_3
 
 Проверка: “Ensure that a user for the container has been created”
 Смысл: контейнер запускается без создания/указания отдельного пользователя, то есть по умолчанию под root.
@@ -675,7 +675,7 @@ OWASP Dependency-Check SCA
 
 Были просканированы директории с уязвимым приложением (vulnerable-app) и с набором библиотек (sca/lib).
 
-**Механизм анализа**
+Механизм анализа
 
 Для Java/Maven-части (pom.xml и JAR):
 
