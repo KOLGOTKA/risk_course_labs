@@ -1,3 +1,4 @@
+# shellcheck disable=SC2086,SC2046
 #/usr/bin/env bash
 
 # To use completion for dependency-check you must run:
