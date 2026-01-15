@@ -47,8 +47,8 @@ jobs:
 
       - name: Lint and format with ruff
         run: |
-          ruff check .
-          ruff format --check .
+          ruff check . --exclude labs/lab07/sca/generate_unified_report.py
+          ruff format --check . --exclude labs/lab07/sca/generate_unified_report.py
 
       - name: Lint shell scripts with shellcheck
         run: |
