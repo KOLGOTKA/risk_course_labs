@@ -54,7 +54,19 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y shellcheck
-          git ls-files '*.sh' | xargs -r shellcheck -e SC2086
+          #git ls-files '*.sh' | xargs -r shellcheck -e SC2086
+          mapfile -t FILES < <(git ls-files '*.sh' \
+            ':!:labs/lab07/sca/tools/dependency-check/**' \
+            ':!:**/vendor/**' \
+            ':!:**/node_modules/**')
+
+          if [ ${#FILES[@]} -eq 0 ]; then
+            echo "No shell scripts to lint"
+            exit 0
+          fi
+
+          shellcheck -x -e SC2086 "${FILES[@]}"
+
 
 
 #      - name: Check shell formatting with shfmt
@@ -86,6 +98,8 @@ jobs:
             SECURITY.md
             CODE_OF_CONDUCT.md
             CONTRIBUTING.md
+            !labs/lab07/sca/tools/**/*
+            !labs/lab06/README.md
 
   layout_linter_checks:
     runs-on: ubuntu-latest

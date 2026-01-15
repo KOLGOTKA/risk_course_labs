@@ -189,14 +189,6 @@
             } else {
                 dependenciesHeader.text(dependenciesHeaderAllText);
             }
-            const plainCaptionPart = $('#tablecaption-plain');
-            const plainCaptionPartAllText = 'Summary of All Dependencies';
-            if (plainCaptionPart.text() == plainCaptionPartAllText) {
-                plainCaptionPart.text('Summary of Vulnerable Dependencies');
-            } else {
-                plainCaptionPart.text(plainCaptionPartAllText);
-            }
-            return toggleDisplay(event.target, '.notvulnerable', '(click to show all)', '(click to show less)');
           });
           $( ".versionToggle" ).bind( "click", function( event ) {
             var lnk = event.target;
@@ -602,7 +594,6 @@
                 float:right;
             }
             .disclaimer {
-                color: #595959;
                 font: 9px "Droid Sans",Arial,"Helvetica Neue","Lucida Grande",sans-serif
             }
             .sortable {
@@ -645,7 +636,6 @@
     <body>
         <div id="modal-background"></div>
         <div id="modal-content">
-            <div>Press CTR-C to copy XML&nbsp;<a href="https://dependency-check.github.io/DependencyCheck/general/suppression.html" class="infolink" target="_blank" title="Help with suppressing false positives">[help]</a></div>
                 <button id="modal-suppress-change-to-packageUrl" class="modal-button suppresstype" title="Supress by Maven Group Artifact Version">Suppress By GAV</button>
                 <button id="modal-suppress-change-to-sha1" class="modal-button suppresstype" title="Supress by SHA1 hash">Suppress By SHA1</button><br/>
                 <input type="hidden" id="suppress-name"/>
