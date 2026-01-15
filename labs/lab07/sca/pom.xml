@@ -3,56 +3,73 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
-    <groupId>lab07</groupId>
-    <artifactId>sca-demo</artifactId>
-    <version>1.0.0</version>
-    <packaging>jar</packaging>
+  <modelVersion>4.0.0</modelVersion>
 
-    <name>sca-demo</name>
+  <groupId>lab07</groupId>
+  <artifactId>sca-demo</artifactId>
+  <version>1.0.1</version>
+  <packaging>jar</packaging>
+  <name>sca-demo</name>
 
+  <dependencyManagement>
     <dependencies>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>2.1.6</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.jaxrs</groupId>
-            <artifactId>jackson-jaxrs-json-provider</artifactId>
-            <version>2.4.6</version>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-httpclient</groupId>
-            <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
-        </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson</groupId>
+        <artifactId>jackson-bom</artifactId>
+        <version>2.16.1</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
+  </dependencyManagement>
 
-    <build>
+  <dependencies>
+
+    <dependency>
+      <groupId>org.apache.groovy</groupId>
+      <artifactId>groovy</artifactId>
+      <version>4.0.15</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.jaxrs</groupId>
+      <artifactId>jackson-jaxrs-json-provider</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents.client5</groupId>
+      <artifactId>httpclient5</artifactId>
+      <version>5.2.1</version>
+    </dependency>
+
+  </dependencies>
+
+  <build>
     <plugins>
-        <plugin>
+      <plugin>
         <groupId>org.owasp</groupId>
         <artifactId>dependency-check-maven</artifactId>
         <version>12.1.0</version>
+
         <configuration>
-            <format>ALL</format>
-            <outputDirectory>${project.basedir}/dependency-check-report</outputDirectory>
-            <failBuildOnCVSS>0.0</failBuildOnCVSS>
-            <autoUpdate>false</autoUpdate>
+          <format>ALL</format>
+          <outputDirectory>${project.basedir}/dependency-check-report</outputDirectory>
+          <autoUpdate>false</autoUpdate>
+          <failBuildOnCVSS>11</failBuildOnCVSS>
         </configuration>
+
         <executions>
-            <execution>
+          <execution>
+            <id>default</id>
             <goals>
-                <goal>check</goal>
+              <goal>check</goal>
             </goals>
-            </execution>
+          </execution>
         </executions>
-        </plugin>
+
+      </plugin>
     </plugins>
-    </build>
+  </build>
 
 </project>

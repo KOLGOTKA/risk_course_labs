@@ -12,7 +12,12 @@ services:
       - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
     security_opt:
       - no-new-privileges:true
-    user: "nginx"
+    #user: "nginx"
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx:rw,mode=1777
+      - /var/run:rw,mode=1777
+      - /tmp:rw,mode=1777
   insecure-db:
     image: postgres:16-alpine
     container_name: insecure-db
@@ -32,7 +37,7 @@ services:
     working_dir: /app
     volumes:
       - ./app:/app:rw
-    command: ["python", "app.py"]
+    command: ["sh", "-lc", "pip install --no-cache-dir -r requirements.txt && python app.py"]
     environment:
       - APP_SECRET_KEY=hardcoded-in-env
       - DB_URL=postgresql://vulnuser:root@insecure-db:5432/vulnapp
